@@ -1,0 +1,24 @@
+{% extends "wines/baseWines.html.twig"%}
+
+{% block contenido %}
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h2>{{ wine.nombre }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><img width="100px" src="{{ wine.imagen }}" /></div>
+    <div class="col">
+      <div class="row"><div class="col">D.O: {{ wine.DO }}</div>
+      <div class="row">
+        <span></span>
+        <div class="col">Ficha de cata: {{ wine.ficha }}</div>
+      </div>
+      <div class="row">
+        <div class="col">Maridaje: {{ wine.maridaje }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}
