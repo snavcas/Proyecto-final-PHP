@@ -109,4 +109,33 @@ class WinesController extends AbstractController
             "wineForm"=>$form
         ]);
     }
+
+    #[Route("/edit/wine/{id}", name:"editWine")]
+    public function editWine(Request $request, EntityManagerInterface $doctrine, $id)
+    {
+        $repositorio=$doctrine->getRepository(Wine::class);
+        $wine=$repositorio->find($id);
+        
+        $form = $this-> createForm(WineType::class, $wine);
+        $form->handleRequest($request);
+        if ($form-> isSubmitted() && $form->isValid()){
+            $wine = $form-> getData();
+            $doctrine->persist($wine);
+            $doctrine->flush();
+            return $this->redirectToRoute("listWine");
+        }
+        return $this->renderForm("wines/setWine.html.twig", [
+            "wineForm"=>$form
+        ]);
+    }
+    #[Route("/delete/wine/{id}",name: "deleteWine")]
+    public function deleteWine(EntityManagerInterface $doctrine, $id)
+    {
+        $repositorio=$doctrine->getRepository(Wine::class);
+        $wine=$repositorio->find($id);
+        $doctrine->remove($wine);
+        $doctrine->flush();
+        return $this->redirectToRoute("listWine");
+    }
+    
 };

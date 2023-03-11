@@ -1,21 +1,33 @@
 {% extends "wines/baseWines.html.twig" %}
 
+{% block stylesheets %}
+
+
+  {{ encore_entry_link_tags('app') }}
+
+
+{% endblock %}
+
 {% block contenido %}
 
-<h2>Listado Vinos</h2>
-<div class="row row-cols-1 row-cols-md-2"  >
+
+<main class="fondo">
+  <h2>Listado Vinos</h2>
+<div class="flex-card"  >
   {% for wine in wines %}
-  <div class="col mb-4" >
-    <div class="card" style="width: 18rem" text-aling="center">
-      <img width="25%" src="{{ wine.imagen }}"  />
-      <div class="card-body">
+  <div class="" >
+    <div class="flex-card1" style="width: 18rem" text-aling="center">
+    <div class="card-body">
         <h5 class="card-title">{{ wine.nombre }}</h5>
-        <p class="card-text">D.O: {{ wine.DO }}</p>
+        <p class="card-text"> {{ wine.DO }}</p>
         <a href="{{ path ("showWine", {id:wine.id}) }}" class="btn btn-primary">Más Info</a>
-      </div>
+        <a href="{{ path ("editWine", {id:wine.id}) }}" class="btn btn-primary">Editar</a>
+        <a href="{{ path ("deleteWine", {id:wine.id}) }}" class="btn btn-primary">Eliminar</a>
+    </div>
     </div>
   </div>
   {% endfor %}
 </div>
+</main>
 
 {% endblock contenido %}
